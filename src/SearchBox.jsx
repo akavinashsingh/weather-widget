@@ -5,14 +5,15 @@ import { useState } from "react";
 
 export default function SearchBox() {
     let [city,setCity] = useState("");
-const API_URL = process.env.URL;
-const API_KEY = process.env.API;
+const API_URL = import.meta.env.VITE_URL;
+const API_KEY = import.meta.env.VITE_API;
 
 let getWeatherInfo = async()=>{
  let response =  await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`);
 let jsonResponse= await response.json();
 
 let result = {
+  city: city,
     temp: jsonResponse.main.temp,
     tempMin: jsonResponse.main.temp_min,
     tempMax: jsonResponse.main.temp_max,
